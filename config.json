@@ -1,0 +1,5 @@
+{
+  "api_urls": {
+    "nuget_catalog_url": "https://api.nuget.org/v3/catalog0/index.json"
+  }
+}
