@@ -8,7 +8,18 @@ class Package:
         self.license = license
         self.description = description
         
-
+    def to_dict(self):
+        package_dict = {
+            'url': self.url,
+            'package_id': self.package_id,
+            'version': self.version,
+            'name': self.name,
+            'author': self.author,
+            'license': self.license,
+            'description': self.description
+        }
+        return package_dict
+    
     
     def update(self, **kwargs):
         for key, value in kwargs.items():
