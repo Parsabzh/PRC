@@ -1,6 +1,6 @@
 import requests
 import json
-from nuget.package import Package
+from package import Package
 import pandas as pd
 import json
 import os
@@ -47,23 +47,33 @@ def process_catalog_data(catalog_url, save_interval=1000, save_filename="process
     catalog_data = fetch_json_response_from_url(catalog_url)
     items = catalog_data.get("items", [])
 
+    package_data_list = process_catalog_items(items, package_count, package_data_list, save_interval, save_filename)
+
+    save_data(package_data_list, save_filename)
+
+    return package_data_list
+
+def process_catalog_items(items, package_count, package_data_list, save_interval, save_filename):
     for item in items:
         page_url = item.get("@id", "")
         page_data = fetch_json_response_from_url(page_url)
         page_items = page_data.get("items", [])
 
-        for page_item in page_items:
-            package_count += 1
-            package = fetch_package_data(page_item)
-            package_data_list.append(package)
-
-            if package_count % save_interval == 0:
-                save_data(package_data_list, save_filename)
-                print(f"Processed {package_count} packages. Data saved.")
-
-    save_data(package_data_list, save_filename)
+        package_data_list, package_count = process_page_items(page_items, package_count, package_data_list, save_interval, save_filename)
 
     return package_data_list
+
+def process_page_items(page_items, package_count, package_data_list, save_interval, save_filename):
+    for page_item in page_items:
+        package_count += 1
+        package = fetch_package_data(page_item)
+        package_data_list.append(package)
+
+        if package_count % save_interval == 0:
+            save_data(package_data_list, save_filename)
+            print(f"Processed {package_count} packages. Data saved.")
+
+    return package_data_list, package_count
 
 
 def fetch_nuget_packages():
