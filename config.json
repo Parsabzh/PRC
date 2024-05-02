@@ -1,5 +1,7 @@
 {
   "api_urls": {
-    "nuget_catalog_url": "https://api.nuget.org/v3/catalog0/index.json"
+    "nuget_catalog_url": "https://api.nuget.org/v3/catalog0/index.json",
+    "pip_package_names_url": "https://www.piwheels.org/packages.json",
+    "pip_package_data_url": "https://pypi.org/pypi/{package_name}/json"
   }
 }
