@@ -2,6 +2,8 @@
   "api_urls": {
     "nuget_catalog_url": "https://api.nuget.org/v3/catalog0/index.json",
     "pip_package_names_url": "https://www.piwheels.org/packages.json",
-    "pip_package_data_url": "https://pypi.org/pypi/{package_name}/json"
+    "pip_package_data_url": "https://pypi.org/pypi/{package_name}/json",
+    "npm_package_names_url": "https://skimdb.npmjs.com/registry/_all_docs",
+    "npm_package_search_url": "https://registry.npmjs.org/-/v1/search?text={package_name}"
   }
 }
